@@ -184,11 +184,13 @@
             bindings = <&kp>, <&mm_esc_enter>;
         };
 
-        mm_bspc_lsft: mod_morph_bspc_lsft {
-            compatible = "zmk,behavior-mod-morph";
+        mm_bspc_lsft: backspace_hold_repeat {
+            compatible = "zmk,behavior-hold-tap";
             #binding-cells = <0>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <150>;
             bindings = <&kp BSPC>, <&kp BSPC>;
-            mods = <(MOD_LSFT)>;
         };
 
         mm_enter_alttab: mod_morph_enter_alttab {
