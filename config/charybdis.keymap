@@ -186,17 +186,17 @@
 
         mm_bspc_lsft: backspace_hold_repeat {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
-            bindings = <&kp>, <&kp>;
+            bindings = <&kp BSPC>, <&kp BSPC>;
         };
 
         mm_enter_alttab: mod_morph_enter_alttab {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&mm_bspc_lsft BSPC BSPC>, <&kp TAB>;
+            bindings = <&mm_bspc_lsft>, <&kp TAB>;
             mods = <(MOD_LALT|MOD_RALT)>;
             keep-mods = <(MOD_LALT|MOD_RALT)>;
         };
@@ -267,7 +267,7 @@
         mm_lt_bspc_lsft: mm_lt_bspc_lsft {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&lt_mm 2 0>, <&mm_bspc_lsft BSPC BSPC>;
+            bindings = <&lt_mm 2 0>, <&mm_bspc_lsft>;
             mods = <(MOD_LSFT)>;
         };
 
