@@ -57,40 +57,327 @@
     };
 
     macros {
-        To1_macro: To1_macro {
+        simple371: simple371 {
             compatible = "zmk,behavior-macro";
-            label = "To1_macro";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_EFF &rgb_ug RGB_COLOR_HSB(128,100,50) &to 1>;
+            bindings = <&kp S &kp I &kp M &kp P &kp L &kp E &kp N3 &kp N7 &kp N1>;
         };
 
-        To1_macro_A: To1_macro_A {
+        open_dq: open_dq {
             compatible = "zmk,behavior-macro";
-            label = "To1_macro_A";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(128,100,50) &to 1>;
+            wait-ms = <20>;
+            tap-ms = <20>;
+            bindings =
+                <&macro_tap>, <&kp KP_NUM>,
+                <&macro_press>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_N0 &kp KP_N1 &kp KP_N4 &kp KP_N7>,
+                <&macro_release>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_NUM>;
         };
 
-        To0_macro: To0_macro {
+        close_dq: close_dq {
             compatible = "zmk,behavior-macro";
-            label = "To0_macro";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_EFR &to 0>;
+            wait-ms = <20>;
+            tap-ms = <20>;
+            bindings =
+                <&macro_tap>, <&kp KP_NUM>,
+                <&macro_press>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_N0 &kp KP_N1 &kp KP_N4 &kp KP_N8>,
+                <&macro_release>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_NUM>;
         };
 
-        To2_macro_A: To2_macro_A {
+        open_sq: open_sq {
             compatible = "zmk,behavior-macro";
-            label = "To2_macro_A";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_COLOR_HSB(250,100,50) &to 2>;
+            wait-ms = <20>;
+            tap-ms = <20>;
+            bindings =
+                <&macro_tap>, <&kp KP_NUM>,
+                <&macro_press>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_N0 &kp KP_N1 &kp KP_N4 &kp KP_N5>,
+                <&macro_release>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_NUM>;
         };
 
-        To2_macro: To2_macro {
+        close_sq: close_sq {
             compatible = "zmk,behavior-macro";
-            label = "To2_macro";
             #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_EFF &rgb_ug RGB_COLOR_HSB(250,100,50) &to 2>;
+            wait-ms = <20>;
+            tap-ms = <20>;
+            bindings =
+                <&macro_tap>, <&kp KP_NUM>,
+                <&macro_press>, <&kp LALT>,
+                <&macro_tap>, <&kp KP_N0 &kp KP_N1 &kp KP_N4 &kp KP_N6>,
+                <&macro_release &kp LALT>,
+                <&macro_tap &kp KP_NUM>;
         };
+
+        mo_en: mo_en {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_tap &kp RALT>
+                , <&macro_pause_for_release>
+                , <&macro_tap &kp RALT>;
+        };
+    };
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <185>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <185>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        hs: homerow_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <170>;
+            quick-tap-ms = <80>;
+            flavor = "hold-preferred";
+            require-prior-idle-ms = <0>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        mm_space_ralt: mod_morph_space_ralt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SPACE>, <&kp DEL>;
+            mods = <(MOD_RSFT)>;
+        };
+
+        mm_r_alt_f4: mod_morph_r_alt_f4 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp R>, <&kp LA(F4)>;
+            mods = <(MOD_LALT)>;
+        };
+
+        mm_dot_qmark: mod_morph_dot_qmark {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DOT>, <&kp FSLH>;
+            mods = <(MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
+
+        mm_esc_enter: mod_morph_esc_enter {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp ESC>, <&kp ENTER>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        mt_lgui_esc: mt_lgui_esc {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&mm_esc_enter>;
+        };
+
+        mm_bspc_lsft: mod_morph_bspc_lsft {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp BSPC>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        mm_enter_alttab: mod_morph_enter_alttab {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mm_bspc_lsft>, <&kp TAB>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+            keep-mods = <(MOD_LALT|MOD_RALT)>;
+        };
+
+        lt_mm: lt_mod_morph {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <170>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&mm_enter_alttab>;
+        };
+
+        td_h_caps: tap_dance_h_caps {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <210>;
+            bindings = <&kp H>, <&kp CAPS>;
+        };
+
+        td_j_ralt: tap_dance_j_ralt {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <210>;
+            bindings = <&kp J>, <&kp RALT>;
+        };
+
+
+        td_y_hanja: td_y_hanja {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <210>;
+            bindings = <&kp Y>, <&kp LANG_HANJA>;
+        };
+
+
+
+        td_quoute: td_quoute {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <210>;
+            bindings = <&kp SINGLE_QUOTE>, <&kp DOUBLE_QUOTES>;
+        };
+
+        mm_space_shift: mod_morph_space_shift {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&mm_space_ralt>, <&kp DEL>;
+            mods = <(MOD_RSFT)>;
+        };
+
+        hold_mo_en: hold_mo_en {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            tapping-term-ms = <0>;
+            bindings = <&mo_en>, <&none>;
+        };
+
+        mm_mo_en_del: mod_morph_mo_en_del {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&hold_mo_en 0 0>, <&kp DEL>;
+            mods = <(MOD_RSFT)>;
+        };
+
+        mm_lt_bspc_lsft: mm_lt_bspc_lsft {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&lt_mm 2 0>, <&mm_bspc_lsft>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        mm_alt_v_as_s: mm_alt_v_as_s {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp V>, <&kp S>;
+            mods = <(MOD_LALT)>;
+            keep-mods = <(MOD_LALT)>;
+        };
+
+        lth_kp: layer_tap_hold_kp {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
+
+        tbl_lth: trackball_layer_tap_hold {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            tapping-term-ms = <160>;
+            bindings = <&mo>, <&mkp>;
+        };
+
+        tbl_rclk: tbl_rclk {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <250>;
+            bindings = <&mkp RCLK>, <&tog 7>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_uo_haneng {
+            timeout-ms = <75>;
+            key-positions = <19 21>;
+            bindings = <&kp RALT>;
+        };
+
+        combo_mcomma_excl {
+            timeout-ms = <75>;
+            key-positions = <43 44>;
+            bindings = <&kp EXCL>;
+        };
+
+        combo_commadot_qmark {
+            timeout-ms = <75>;
+            key-positions = <44 45>;
+            bindings = <&kp QMARK>;
+        };
+
+        combo_cv_paste {
+            timeout-ms = <75>;
+            key-positions = <39 40>;
+            bindings = <&kp LC(V)>;
+        };
+
+        combo_xc_copy {
+            timeout-ms = <75>;
+            key-positions = <38 39>;
+            bindings = <&kp LC(C)>;
+        };
+
+        combo_zx_cut {
+            timeout-ms = <100>;
+            key-positions = <37 38>;
+            bindings = <&kp LC(X)>;
+        };
+
+        combo_xv_enter {
+            timeout-ms = <75>;
+            key-positions = <38 40>;
+            bindings = <&kp ENTER>;
+        };
+
+        combo_nm_tilde {
+            timeout-ms = <75>;
+            key-positions = <42 43>;
+            bindings = <&kp TILDE>;
+        };
+
+        combo_mdot_del {
+            timeout-ms = <75>;
+            key-positions = <43 45>;
+            bindings = <&kp DEL>;
+        };
+
+        combo_wr_ralt {
+            timeout-ms = <75>;
+            key-positions = <14 16>;
+            bindings = <&kp RALT>;
+        };
+
+        combo_we_back {
+            timeout-ms = <75>;
+            key-positions = <14 15>;
+            bindings = <&kp LA(LEFT)>;
+        };
+
+        combo_er_forward {
+            timeout-ms = <75>;
+            key-positions = <15 16>;
+            bindings = <&kp LA(RIGHT)>;
+        };
+
     };
 
     keymap {
@@ -99,40 +386,33 @@
         layer_0 {
             bindings = <
 &kp ESC         &kp N1  &kp N2  &kp N3        &kp N4     &kp N5      &kp N6     &kp N7     &kp N8     &kp N9            &kp N0    &kp BACKSPACE
-&kp TAB         &kp Q   &kp W   &kp E         &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O             &kp P     &kp BSLH
-&kp LEFT_SHIFT  &kp A   &kp S   &kp D         &kp F      &kp G       &kp H      &kp J      &kp K      &kp L             &kp SEMI  &kp SQT
-&kp LCTRL       &kp Z   &kp X   &kp C         &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp LEFT_BRACKET  &kp FSLH  &kp MINUS
-                                &kp LEFT_ALT  &kp SPACE  &to 1       &kp LWIN   &kp SPACE
-                                              &mkp MB1   &mkp MB2    &kp ENTER
+&kp TAB         &kp Q  &kp W       &kp E         &mm_r_alt_f4   &kp T           &td_y_hanja  &kp U         &kp I            &kp O          &kp P  &kp BSLH
+&kp LEFT_SHIFT  &kp A  &hm LALT S  &hm LCTRL D   &hm LSHIFT F   &kp G           &td_h_caps   &td_j_ralt    &kp K            &kp L          &kp SEMI  &kp SQT
+&tog 5  &kp Z  &kp X       &kp C         &mm_alt_v_as_s &kp B           &kp N        &kp M         &kp COMMA        &mm_dot_qmark  &hs RSHIFT FSLH  &tog 1
+        &mt_lgui_esc LGUI 0  &mm_lt_bspc_lsft  &mt LALT TAB  &mm_mo_en_del  &mm_space_shift
+        &mkp MB1  &mkp MB2  &lt 1 ENTER
             >;
-
-            sensor-bindings =
-                <&scroll_vertical_encoder>,
-                // 编码器1：上下滚动,,
-                <&scroll_horizontal_encoder>;
-
-            // 编码器2：左右滚动
         };
 
         layer_1 {
             bindings = <
 &kp F1          &kp F2           &kp F3           &kp F4           &kp F5           &kp F6        &kp F7     &kp F8    &kp F9      &kp F10            &kp F11  &kp F12
-&kp CAPS        &none            &none            &none            &none            &none         &none      &none     &kp UP      &none              &none    &none
-&kp LEFT_SHIFT  &none            &none            &none            &bt BT_NXT       &bt BT_CLR    &none      &kp LEFT  &kp DOWN    &kp RIGHT          &none    &none
-&kp LCTRL       &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_EFF  &rgb_ug RGB_TOG  &none         &none      &none     &kp PERIOD  &kp RIGHT_BRACKET  &none    &kp EQUAL
-                                                  &kp LEFT_ALT     &kp SPACE        &to 0         &none      &none
-                                                                   &mkp MB1         &mkp MB2      &kp ENTER
+&kp TAB         &kp EXCL   &kp AT    &kp HASH  &kp DLLR       &kp PRCNT           &kp HOME  &kp PG_UP  &kp UP           &kp PG_DN  &kp LG(LS(S))  &kp BSLH
+&kp LEFT_SHIFT  &kp CARET  &kp AMPS  &kp STAR  &kp LPAR       &kp RPAR            &kp END   &kp LEFT   &kp DOWN         &kp RIGHT  &kp INS  &kp SQT
+&to 2       &kp Z      &kp X     &kp C     &kp LESS_THAN  &kp GREATER_THAN    &mkp LCLK &kp LA(LEFT)  &kp LA(RIGHT)  &kp DOT  &kp FSLH  &tog 1
+        &mt_lgui_esc LGUI 0  &mm_lt_bspc_lsft  &mt LALT TAB  &kp RALT  &mm_space_shift
+        &mkp MB1  &mkp MB2  &kp ENTER
             >;
         };
 
         layer_2 {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &none     &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &none     &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans
-                                &trans  &trans    &trans
+&kp TAB         &kp LG(N1)   &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)   &kp UNDER  &kp N7  &kp N8  &kp N9  &kp EQUAL  &kp BSLH
+&kp LEFT_SHIFT  &open_dq     &close_dq   &open_sq    &close_sq   &td_quoute   &kp MINUS  &kp N4  &kp N5  &kp N6  &kp PLUS  &kp SQT
+&tog 2  &kp LC(F10)  &kp F7      &kp F5      &kp F2      &simple371   &kp N0     &kp N1  &kp N2  &kp N3  &kp DOT  &to 1
+        &mt_lgui_esc LGUI 0  &mm_bspc_lsft  &mt LALT TAB  &kp RALT  &mm_space_shift
+        &mkp MB1  &mkp MB2  &lt 1 ENTER
             >;
         };
 
