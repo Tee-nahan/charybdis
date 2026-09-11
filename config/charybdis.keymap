@@ -295,6 +295,15 @@
             bindings = <&mo>, <&mkp>;
         };
 
+        thumb_rclk_scroll: thumb_rclk_scroll {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            tapping-term-ms = <160>;
+            bindings = <&mo>, <&mkp>;
+        };
+
         tbl_rclk: tbl_rclk {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -390,7 +399,7 @@
 &kp LEFT_SHIFT  &kp A  &hm LALT S  &hm LCTRL D   &hm LSHIFT F   &kp G           &td_h_caps   &td_j_ralt    &kp K            &kp L          &kp SEMI  &kp SQT
 &tog 5  &kp Z  &kp X       &kp C         &mm_alt_v_as_s &kp B           &kp N        &kp M         &kp COMMA        &mm_dot_qmark  &hs RSHIFT FSLH  &tog 1
         &mt_lgui_esc LGUI 0  &mm_lt_bspc_lsft  &mt LALT TAB  &mm_mo_en_del  &mm_space_shift
-        &mkp MB1  &mkp MB2  &lt 1 ENTER
+        &mkp MB1  &thumb_rclk_scroll 1 MB2  &lt 1 ENTER
             >;
         };
 
@@ -401,7 +410,7 @@
 &kp LEFT_SHIFT  &kp CARET  &kp AMPS  &kp STAR  &kp LPAR       &kp RPAR            &kp END   &kp LEFT   &kp DOWN         &kp RIGHT  &kp INS  &kp SQT
 &to 2       &kp Z      &kp X     &kp C     &kp LESS_THAN  &kp GREATER_THAN    &mkp LCLK &kp LA(LEFT)  &kp LA(RIGHT)  &kp DOT  &kp FSLH  &tog 1
         &mt_lgui_esc LGUI 0  &mm_lt_bspc_lsft  &mt LALT TAB  &kp RALT  &mm_space_shift
-        &mkp MB1  &mkp MB2  &kp ENTER
+        &mkp MB1  &thumb_rclk_scroll 1 MB2  &kp ENTER
             >;
         };
 
@@ -412,7 +421,7 @@
 &kp LEFT_SHIFT  &open_dq     &close_dq   &open_sq    &close_sq   &td_quoute   &kp MINUS  &kp N4  &kp N5  &kp N6  &kp PLUS  &kp SQT
 &tog 2  &kp LC(F10)  &kp F7      &kp F5      &kp F2      &simple371   &kp N0     &kp N1  &kp N2  &kp N3  &kp DOT  &to 1
         &mt_lgui_esc LGUI 0  &mm_bspc_lsft  &mt LALT TAB  &kp RALT  &mm_space_shift
-        &mkp MB1  &mkp MB2  &lt 1 ENTER
+        &mkp MB1  &thumb_rclk_scroll 1 MB2  &lt 1 ENTER
             >;
         };
 
