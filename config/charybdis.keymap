@@ -186,17 +186,17 @@
 
         mm_bspc_lsft: backspace_hold_repeat {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
-            bindings = <&kp BSPC>, <&kp BSPC>;
+            bindings = <&kp>, <&kp>;
         };
 
         mm_enter_alttab: mod_morph_enter_alttab {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&mm_bspc_lsft>, <&kp TAB>;
+            bindings = <&mm_bspc_lsft BSPC BSPC>, <&kp TAB>;
             mods = <(MOD_LALT|MOD_RALT)>;
             keep-mods = <(MOD_LALT|MOD_RALT)>;
         };
@@ -267,7 +267,7 @@
         mm_lt_bspc_lsft: mm_lt_bspc_lsft {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&lt_mm 2 0>, <&mm_bspc_lsft>;
+            bindings = <&lt_mm 2 0>, <&mm_bspc_lsft BSPC BSPC>;
             mods = <(MOD_LSFT)>;
         };
 
@@ -422,7 +422,7 @@
 &kp TAB         &kp LG(N1)   &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)   &kp UNDER  &kp N7  &kp N8  &kp N9  &kp EQUAL  &kp BSLH
 &kp LEFT_SHIFT  &open_dq     &close_dq   &open_sq    &close_sq   &td_quoute   &kp MINUS  &kp N4  &kp N5  &kp N6  &kp PLUS  &kp SQT
 &tog 2  &kp LC(F10)  &kp F7      &kp F5      &kp F2      &simple371   &kp N0     &kp N1  &kp N2  &kp N3  &kp DOT  &to 1
-        &mt_lgui_esc LGUI 0  &mm_bspc_lsft  &mt LALT TAB  &kp RALT  &mm_space_shift
+        &mt_lgui_esc LGUI 0  &mm_bspc_lsft BSPC BSPC  &mt LALT TAB  &kp RALT  &mm_space_shift
         &mkp MB1  &thumb_rclk_scroll 1 MB2  &lt 1 ENTER
             >;
         };
